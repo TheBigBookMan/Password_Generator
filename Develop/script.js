@@ -15,27 +15,54 @@ let lengthPrompt;
 //Variable for number of criteria chosen
 let numCriteria = 0
 
-//Variables containing symbols in string
+//Variables containing characters in string
 let charsLowString = "abcdefghijklmnopqrstuvwxyz";
 let charsUpString = charsLowString.toUpperCase();
 let charsSpecString = " !\"#$%&\'()*+,-./:;<=>?@[\\]^_`{|}~"
 let charsNumString = "0123456789"
 
-//Variables containing symbols in arrays
+//Variables containing characters in arrays
 let charsLow = charsLowString.split("");
 let charsUp = charsUpString.split("");
 let charsSpec = charsSpecString.split("");
 let charsNum = charsNumString.split("");
 
-/*Array storing the random characterarrays*/
-let randomCharsArray = [charsLow, charsUp, charsSpec, charsNum];
+//Empty array that will be filled with the chosen character arrays
+let randomCharsArrayChoice = []
 
-/*Function that inputs a character array and then returns a random character*/
-const charRandomiser = function(arrayChar) {
-  var randomNum = Math.floor(Math.random() * arrayChar.length + 1);
-  return arrayChar[randomNum];
+/*Function that adds the chosen arrays to the empty array randomCharsArrayChoice*/
+const arrayChooser = function(confirmedArray) {
+  randomCharsArrayChoice.push(confirmedArray);
+  return randomCharsArrayChoice;
+};
+
+arrayChooser(charsUp);
+arrayChooser(charsSpec);
+arrayChooser(charsNum);
+arrayChooser(charsLow);
+console.log(randomCharsArrayChoice)
+
+//Variable for the randomArrayNum to be selected
+let randomArrayNum;
+//Function that randomises the chosen arrays to produce the random characters
+const arrayRandomiser = function(arrayChoices) {
+  var randomNum = Math.floor(Math.random() * arrayChoices.length);
+  randomArrayNum = arrayChoices[randomNum];
+  return randomArrayNum;
 }
 
+console.log(arrayRandomiser(randomCharsArrayChoice));
+
+//Variable for the randomCharacter to be selected
+let randomCharacter;
+/*Function that inputs a character array and then returns a random character*/
+const charRandomiser = function(arrayChar) {
+  var randomNum = Math.floor(Math.random() * arrayChar.length);
+  randomCharacter = arrayChar[randomNum];
+  return randomCharacter;
+}
+
+console.log(charRandomiser(randomArrayNum));
 
 
 //function to generate the password//
@@ -110,6 +137,7 @@ var charChosen = function(confirmChar) {
   }
 }
 
+/*HAVE EMPTY ARRAY AND CHARACTERS CHOSEN TO GO IN THE CHOSEN ARRAY GOES IN THE EMPTY ARRAY AND THEN THAT NEW ARRAY OF CHOSEN CHARACTERS GOES IN THE RANDOMISE FUNCTION*/
 
 /*MAKE A FUNCTION THAT IS BOOLEAN FOR IF THEY WANT SPECIFIC SYMBOLS AND THEN IF TRUE THEN RETURN A FUNCTION THAT GOES THROUGH THAT SPECIFIC SYMBOL ARRAY AND FINDS RANDOM SYMBOLS, IF ELSE THEN RETURN 0*/
 
