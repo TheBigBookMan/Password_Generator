@@ -15,6 +15,11 @@ let lengthPrompt;
 //Variable for number of criteria chosen
 let numCriteria = 0
 
+//Counter for criteria requested
+let requestCriteriaNum = 0
+
+let confirmLow;
+
 //Variables containing characters in string
 let charsLowString = "abcdefghijklmnopqrstuvwxyz";
 let charsUpString = charsLowString.toUpperCase();
@@ -30,59 +35,80 @@ let charsNum = charsNumString.split("");
 //Empty array that will be filled with the chosen character arrays
 let randomCharsArrayChoice = []
 
-/*Function that adds the chosen arrays to the empty array randomCharsArrayChoice*/
-const arrayChooser = function(confirmedArray) {
-  randomCharsArrayChoice.push(confirmedArray);
-  return randomCharsArrayChoice;
-};
-
-arrayChooser(charsUp);
-arrayChooser(charsSpec);
-arrayChooser(charsNum);
-arrayChooser(charsLow);
-console.log(randomCharsArrayChoice)
-
 //Variable for the randomArrayNum to be selected
 let randomArrayNum;
-//Function that randomises the chosen arrays to produce the random characters
-const arrayRandomiser = function(arrayChoices) {
-  var randomNum = Math.floor(Math.random() * arrayChoices.length);
-  randomArrayNum = arrayChoices[randomNum];
-  return randomArrayNum;
-}
-
-console.log(arrayRandomiser(randomCharsArrayChoice));
 
 //Variable for the randomCharacter to be selected
 let randomCharacter;
-/*Function that inputs a character array and then returns a random character*/
+
+/*Function that adds the chosen arrays to the empty array randomCharsArrayChoice*/
+const arrayChooser = function(confirmedArray) {
+  randomCharsArrayChoice.push(confirmedArray);
+  arrayRandomiser(randomCharsArrayChoice);
+};
+
+
+// arrayChooser(charsUp);
+// arrayChooser(charsSpec);
+// arrayChooser(charsNum);
+
+
+
+
+// //Function that randomises the chosen arrays to produce the random characters
+const arrayRandomiser = function(arrayChoices) {
+  var randomNum = Math.floor(Math.random() * arrayChoices.length);
+  randomArrayNum = arrayChoices[randomNum];
+  charRandomiser(randomArrayNum);
+}
+
+
+
+
+
+// /*Function that inputs a character array and then returns a random character*/
 const charRandomiser = function(arrayChar) {
   var randomNum = Math.floor(Math.random() * arrayChar.length);
   randomCharacter = arrayChar[randomNum];
   return randomCharacter;
 }
 
-console.log(charRandomiser(randomArrayNum));
+/*GET THE CHARTANDOMISER FUNCTION TO THEN ADD THE RANDOMCHARACTER TO A NEW FUNCTION BELOW THAT TAKES IN THE CHARACTERS AND PUSHES THEM TO A NEW ARRAY AND THEN JOIN THE ARRAY TO MAKE THE PASSWORD*/
+
 
 
 //function to generate the password//
 function generatePassword() {
   //asking user if they want to begin and with criteria//
   let confirm = window.confirm("The password will contain a series of numbers that you get to select as well as the length, are you ready to begin?");
-
   //If user confirms to continue, firstPrompt is initialized
   if (confirm) {
     firstPrompt(confirm);
   } 
-
   //If user denies to continue then they are told goodbye and program ended
   else {
     window.alert("Cheerio.")
     return;
   };
 
-  secondPrompt();
-  charChosen(confirmLow);
+  if (requestCriteriaNum === 1) {
+    secondPrompt()
+  }
+
+  
+  // console.log(randomCharsArrayChoice)
+  // console.log(arrayRandomiser(randomCharsArrayChoice));
+  // console.log(randomArrayNum);
+  // charRandomiser(randomArrayNum);
+  // console.log(randomCharacter);
+
+  
+
+  
+  // arrayChooser(charsLow);
+  // charChosen(confirmLow);
+  // arrayRandomiser(randomCharsArrayChoice);
+  // charRandomiser(randomArrayNum);
 
 };
 
@@ -105,6 +131,7 @@ var firstPrompt = function() {
 
 //If the user inputs a number between 8 and 128 then that number is returned in lengthPrompt
     else {
+      requestCriteriaNum ++
       return lengthPrompt;
     };
 
@@ -113,29 +140,24 @@ var firstPrompt = function() {
     window.alert("Cheerio.")
     return;
   }; 
+ 
 }
 
-  
-//secondPrompt for types of characters//
+  //secondPrompt for types of characters//
 //JUST INPUT THE CONFIRM PROMPTS FOR DIFFERENT SYMBOLS//
 var secondPrompt = function() {
   confirmLow = window.confirm("Would you like to add lowercase characters?");
   if (confirmLow) {
     numCriteria ++
-    return confirmLow;
+    requestCriteriaNum ++
+    arrayChooser(charsSpec);
   }
-
 };
 
 
-/*Function that uses the characters that were chosen*/
-var charChosen = function(confirmChar) {
-  if (confirmChar) {
-    
-  } else {
 
-  }
-}
+
+
 
 /*HAVE EMPTY ARRAY AND CHARACTERS CHOSEN TO GO IN THE CHOSEN ARRAY GOES IN THE EMPTY ARRAY AND THEN THAT NEW ARRAY OF CHOSEN CHARACTERS GOES IN THE RANDOMISE FUNCTION*/
 
