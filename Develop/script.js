@@ -51,6 +51,9 @@ let randomArrayNum;
 //Variable for the randomCharacter to be selected
 let randomCharacter;
 
+//Variable for the selected randomized character array
+let randomisedCharsArray = []
+
 /*Function that adds the chosen arrays to the empty array randomCharsArrayChoice*/
 const arrayChooser = function(confirmedArray) {
   randomCharsArrayChoice.push(confirmedArray);
@@ -69,8 +72,13 @@ const charRandomiser = function(arrayChar) {
   var randomNum = Math.floor(Math.random() * arrayChar.length);
   randomCharacter = arrayChar[randomNum];
   // console.log(randomCharacter);/*DONT FORGET TO DELETE THIS line AFTER ITS JUST FOR PRACTICE!*/
-  return randomCharacter;//call new function in here to add random character to as a parameter
+  passwordArray(randomCharacter);//call new function in here to add random character to as a parameter
 }
+
+//Function will take in the randomized character and then add it to an array
+const passwordArray = function(characterInsert) {
+  randomisedCharsArray.push(characterInsert);
+};
 
 /*GET THE CHARTANDOMISER FUNCTION TO THEN ADD THE RANDOMCHARACTER TO A NEW FUNCTION BELOW THAT TAKES IN THE CHARACTERS AND PUSHES THEM TO A NEW ARRAY AND THEN JOIN THE ARRAY TO MAKE THE PASSWORD*/
 /*MIGHT NEED TO ADD INTO THIS FUNCTION THE LENGTH VARIABLE AS TO KEEP IT A SPECIFIC LENGTH OR CREATE A SMALLER FUNCTION TO DO THAT AND ADD IT IN*/
@@ -107,6 +115,8 @@ function generatePassword() {
     fifthPrompt()
   };
 
+  selectionAmount()
+
   // console.log(numCriteria);
   // console.log("request" + requestCriteriaNum);
 
@@ -120,7 +130,7 @@ function generatePassword() {
 
   /*THIS IS TO TEST IF THE SELETIONS ARE GOING THROUGH WIILL NEED TO LINK RANDOM CHARACTER TO A FUNCTION THAT STORES IN THEM IN A ARRAY THOUGH*/
   console.log(randomCharacter);
-
+  console.log(randomisedCharsArray);
   
 
   
@@ -189,7 +199,7 @@ var fourthPrompt = function() {
     arrayChooser(charsSpec);
   }};
 
-
+//fifthPrompt for confirming number characters
 var fifthPrompt = function() {
   confirmNum = window.confirm("Would you like to add number characters?");
   requestCriteriaNum ++;
@@ -198,7 +208,13 @@ var fifthPrompt = function() {
     arrayChooser(charsNum);
   }};  
 
-
+//prompt alerting if there weren't more than one selection
+var selectionAmount = function() {
+  if (numCriteria < 1) {
+    window.alert("You need to select atleast one criteria. Please try again.")
+    return;
+  };
+};
 
 
 /*HAVE EMPTY ARRAY AND CHARACTERS CHOSEN TO GO IN THE CHOSEN ARRAY GOES IN THE EMPTY ARRAY AND THEN THAT NEW ARRAY OF CHOSEN CHARACTERS GOES IN THE RANDOMISE FUNCTION*/
