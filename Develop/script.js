@@ -6,7 +6,6 @@ function writePassword() {
   var password = generatePassword();
   var passwordText = document.querySelector("#password");
   passwordText.value = password;
-  
 }
 
 //Variable for length of password chosen by user
@@ -54,11 +53,7 @@ let randomCharacter;
 //Variable for the selected randomized character array
 let randomisedCharsArray = []
 
-/*Function that adds the chosen arrays to the empty array randomCharsArrayChoice*/
-const arrayChooser = function(confirmedArray) {
-  randomCharsArrayChoice.push(confirmedArray);
-  arrayRandomiser(randomCharsArrayChoice);
-};
+let passwordString;
 
 // //Function that randomises the chosen arrays to produce the random characters
 const arrayRandomiser = function(arrayChoices) {
@@ -88,7 +83,7 @@ const passwordArray = function(characterInsert) {
 //function to generate the password//
 function generatePassword() {
   //asking user if they want to begin and with criteria//
-  let confirm = window.confirm("The password will contain a series of numbers that you get to select as well as the length, are you ready to begin?");
+  let confirm = window.confirm("The password will contain a series of characters that you get to select as well as the length, are you ready to begin?");
   //If user confirms to continue, firstPrompt is initialized
   if (confirm) {
     firstPrompt(confirm);
@@ -115,22 +110,43 @@ function generatePassword() {
     fifthPrompt()
   };
 
+  console.log(randomCharsArrayChoice)
+
   selectionAmount()
+
+  let counter = 0;
+  while (counter < lengthPrompt) {
+    arrayRandomiser(randomCharsArrayChoice);
+    counter ++;
+  }
+  console.log(counter);
+
+
+  // arrayRandomiser(randomCharsArrayChoice);
+  //need this out
+  console.log(randomArrayNum);
+  console.log(randomCharacter);
+  console.log(randomisedCharsArray);
 
   // console.log(numCriteria);
   // console.log("request" + requestCriteriaNum);
 
   /*ADD in the requestcriteraianum and add 1 everytime and then add in the prompt*/
 
-  
-  console.log(randomCharsArrayChoice)
-  // console.log(arrayRandomiser(randomCharsArrayChoice));
-  console.log(randomArrayNum);
-  // charRandomiser(randomArrayNum);
+  // const changeArrayToString = function() {
+    
+  // }
 
-  /*THIS IS TO TEST IF THE SELETIONS ARE GOING THROUGH WIILL NEED TO LINK RANDOM CHARACTER TO A FUNCTION THAT STORES IN THEM IN A ARRAY THOUGH*/
-  console.log(randomCharacter);
-  console.log(randomisedCharsArray);
+  passwordString = randomisedCharsArray.join("");
+  console.log(passwordString);
+  return passwordString;
+  
+ 
+  // console.log(charRandomiser(randomArrayNum));
+
+  // /*THIS IS TO TEST IF THE SELETIONS ARE GOING THROUGH WIILL NEED TO LINK RANDOM CHARACTER TO A FUNCTION THAT STORES IN THEM IN A ARRAY THOUGH*/
+
+  
   
 
   
@@ -172,40 +188,40 @@ var firstPrompt = function() {
  
 }
 
-//secondPrompt for confirming lowercase characters
+//secondPrompt for confirming lowercase characters and pushing the array to another array
 var secondPrompt = function() {
   confirmLow = window.confirm("Would you like to add lowercase characters?");
   requestCriteriaNum ++;
   if (confirmLow) {
     numCriteria ++
-    arrayChooser(charsLow);
+    randomCharsArrayChoice.push(charsLow);
   }};
 
-//thirdPrompt for confirming uppercase characters
+//thirdPrompt for confirming uppercase characters and pushing the array to another array
 var thirdPrompt = function() {
   confirmUp = window.confirm("Would you like to add uppercase characters?");
   requestCriteriaNum ++;
   if (confirmUp) {
     numCriteria ++
-    arrayChooser(charsUp);
+    randomCharsArrayChoice.push(charsUp);
   }};
 
-//fourthPrompt for confirming special characters
+//fourthPrompt for confirming special characters and pushing the array to another array
 var fourthPrompt = function() {
   confirmSpec = window.confirm("Would you like to add special characters?");
   requestCriteriaNum ++;
   if (confirmSpec) {
     numCriteria ++
-    arrayChooser(charsSpec);
+    randomCharsArrayChoice.push(charsSpec);
   }};
 
-//fifthPrompt for confirming number characters
+//fifthPrompt for confirming number characters and pushing the array to another array
 var fifthPrompt = function() {
   confirmNum = window.confirm("Would you like to add number characters?");
   requestCriteriaNum ++;
   if (confirmNum) {
     numCriteria ++
-    arrayChooser(charsNum);
+    randomCharsArrayChoice.push(charsNum);
   }};  
 
 //prompt alerting if there weren't more than one selection
