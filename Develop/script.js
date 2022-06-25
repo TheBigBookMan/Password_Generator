@@ -18,7 +18,17 @@ let numCriteria = 0
 //Counter for criteria requested
 let requestCriteriaNum = 0
 
+//Variable that confirms lower case characters were accepted or not
 let confirmLow;
+
+//Variable that confirms upper case characters were accepted or not
+let confirmUp;
+
+//Variable that confirms special characters were accepted or not
+let confirmSpec;
+
+//Variable that confirms number characters were accepted or not
+let confirmNum;
 
 //Variables containing characters in string
 let charsLowString = "abcdefghijklmnopqrstuvwxyz";
@@ -47,14 +57,6 @@ const arrayChooser = function(confirmedArray) {
   arrayRandomiser(randomCharsArrayChoice);
 };
 
-
-// arrayChooser(charsUp);
-// arrayChooser(charsSpec);
-// arrayChooser(charsNum);
-
-
-
-
 // //Function that randomises the chosen arrays to produce the random characters
 const arrayRandomiser = function(arrayChoices) {
   var randomNum = Math.floor(Math.random() * arrayChoices.length);
@@ -62,18 +64,16 @@ const arrayRandomiser = function(arrayChoices) {
   charRandomiser(randomArrayNum);
 }
 
-
-
-
-
 // /*Function that inputs a character array and then returns a random character*/
 const charRandomiser = function(arrayChar) {
   var randomNum = Math.floor(Math.random() * arrayChar.length);
   randomCharacter = arrayChar[randomNum];
-  return randomCharacter;
+  // console.log(randomCharacter);/*DONT FORGET TO DELETE THIS line AFTER ITS JUST FOR PRACTICE!*/
+  return randomCharacter;//call new function in here to add random character to as a parameter
 }
 
 /*GET THE CHARTANDOMISER FUNCTION TO THEN ADD THE RANDOMCHARACTER TO A NEW FUNCTION BELOW THAT TAKES IN THE CHARACTERS AND PUSHES THEM TO A NEW ARRAY AND THEN JOIN THE ARRAY TO MAKE THE PASSWORD*/
+/*MIGHT NEED TO ADD INTO THIS FUNCTION THE LENGTH VARIABLE AS TO KEEP IT A SPECIFIC LENGTH OR CREATE A SMALLER FUNCTION TO DO THAT AND ADD IT IN*/
 
 
 
@@ -93,19 +93,38 @@ function generatePassword() {
 
   if (requestCriteriaNum === 1) {
     secondPrompt()
-  }
+  };
+
+  if (requestCriteriaNum === 2) {
+    thirdPrompt()
+  };
+
+  if (requestCriteriaNum === 3) {
+    fourthPrompt()
+  };
+
+  if (requestCriteriaNum === 4) {
+    fifthPrompt()
+  };
+
+  // console.log(numCriteria);
+  // console.log("request" + requestCriteriaNum);
+
+  /*ADD in the requestcriteraianum and add 1 everytime and then add in the prompt*/
 
   
-  // console.log(randomCharsArrayChoice)
+  console.log(randomCharsArrayChoice)
   // console.log(arrayRandomiser(randomCharsArrayChoice));
-  // console.log(randomArrayNum);
+  console.log(randomArrayNum);
   // charRandomiser(randomArrayNum);
-  // console.log(randomCharacter);
+
+  /*THIS IS TO TEST IF THE SELETIONS ARE GOING THROUGH WIILL NEED TO LINK RANDOM CHARACTER TO A FUNCTION THAT STORES IN THEM IN A ARRAY THOUGH*/
+  console.log(randomCharacter);
 
   
 
   
-  // arrayChooser(charsLow);
+  // arrayChooser(charsUp);
   // charChosen(confirmLow);
   // arrayRandomiser(randomCharsArrayChoice);
   // charRandomiser(randomArrayNum);
@@ -143,18 +162,41 @@ var firstPrompt = function() {
  
 }
 
-  //secondPrompt for types of characters//
-//JUST INPUT THE CONFIRM PROMPTS FOR DIFFERENT SYMBOLS//
+//secondPrompt for confirming lowercase characters
 var secondPrompt = function() {
   confirmLow = window.confirm("Would you like to add lowercase characters?");
+  requestCriteriaNum ++;
   if (confirmLow) {
     numCriteria ++
-    requestCriteriaNum ++
+    arrayChooser(charsLow);
+  }};
+
+//thirdPrompt for confirming uppercase characters
+var thirdPrompt = function() {
+  confirmUp = window.confirm("Would you like to add uppercase characters?");
+  requestCriteriaNum ++;
+  if (confirmUp) {
+    numCriteria ++
+    arrayChooser(charsUp);
+  }};
+
+//fourthPrompt for confirming special characters
+var fourthPrompt = function() {
+  confirmSpec = window.confirm("Would you like to add special characters?");
+  requestCriteriaNum ++;
+  if (confirmSpec) {
+    numCriteria ++
     arrayChooser(charsSpec);
-  }
-};
+  }};
 
 
+var fifthPrompt = function() {
+  confirmNum = window.confirm("Would you like to add number characters?");
+  requestCriteriaNum ++;
+  if (confirmNum) {
+    numCriteria ++
+    arrayChooser(charsNum);
+  }};  
 
 
 
